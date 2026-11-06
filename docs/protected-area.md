@@ -54,9 +54,9 @@ Physical Layer specification. The first 16 bytes from my first card:
 ## Verdict
 
 A Class 10 card is a post-2010 part, and this one was made with no CPRM protected area
-at all. Zero protected area means there is no place for the title keys, so SD-Jukebox
-refuses to format or check out. It is right to. For this card, nothing about Windows 11
-was in the way.
+at all. Zero protected area means there's nowhere to put the title keys, so SD-Jukebox
+refuses to format or check out, and it's right to. For this card, nothing about
+Windows 11 was in the way.
 
 A second 1 GB card, bought as a replacement and sold as an older branded part, failed
 Format the same way. Its register, read with `tools/Read-SDStatus.ps1`, is identical:
@@ -84,16 +84,16 @@ speed-class era, so roughly pre-2006. This card:
 
 So the zero-area finding explains the first two cards completely, and the third card
 shows the other half of the problem: with a card that has the area, what remains is
-whether the SD-Jukebox build accepts it on the OS it is running on.
+whether the SD-Jukebox build accepts it on the OS it's running on.
 
 ## What card to use
 
-- Standard SD, 2 GB or less. Not SDHC, which the camera cannot initialise.
+- Standard SD, 2 GB or less. Not SDHC, which the camera can't initialise.
 - Made by a licensed maker in the CPRM-mandatory era, roughly 2004 to 2009: Panasonic
   RP-SD series, SanDisk SDSDB-512 / SDSDB-1024 / SDSDB-002G, Toshiba, Kingston, Lexar
   of that era.
 - 512 MB to 1 GB. The camera manual's tables stop at 512 MB; V4.0 refused my 1 GB
-  cards and V5.1 accepted one in XP. 2 GB is within the camera's limit but I have not
+  cards and V5.1 accepted one in XP. 2 GB is within the camera's limit but I haven't
   tried one.
 - No speed-class marking on the label. A Class 10, U1 or "C" circle means a post-2010
   part. Avoid anything marked "Non-CPRM", and the unbranded "1 GB / 2 GB Class 4 SLC"
@@ -104,6 +104,6 @@ whether the SD-Jukebox build accepts it on the OS it is running on.
 
 `tools/Read-SDStatus.ps1`, run elevated with the camera docked in PC mode, sends the
 same INQUIRY and `C1` command to the cradle without SD-Jukebox and prints
-`SIZE_OF_PROTECTED_AREA`. It is read-only. Non-zero means the card can hold SD-Audio;
-zero means no software will ever make it work. There is no PC-side bypass for a
+`SIZE_OF_PROTECTED_AREA`. It's read-only. Non-zero means the card can hold SD-Audio;
+zero means no software will ever make it work. There's no PC-side bypass for a
 missing area: the card controller enforces it, and the camera reads its keys from it.

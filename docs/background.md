@@ -4,7 +4,7 @@
 
 The Panasonic SV-AV50 is a 2004 "D-snap" SD hybrid: 1.2 MP stills, MPEG-4 video in
 ASF, voice memos, and an [AUDIO] mode that plays music. It takes standard SD cards
-only (SD 1.x/2.0, 2 GB at most); it predates SDHC and cannot initialise an SDHC card.
+only (SD 1.x/2.0, 2 GB at most); it predates SDHC and can't initialise an SDHC card.
 It comes with a cradle that provides charging, USB and composite AV-out, and on the
 Japanese model AV-in too. The camera has no USB socket of its own.
 
@@ -14,7 +14,7 @@ From the US operating instructions (pages 28, 43, 45, 52, 61, 63):
 
 - [AUDIO] mode plays MPEG-2 AAC and MP3, recommended at 64, 96 or 128 kbps. No WMA.
 - Only tracks transferred with the bundled SD-Jukebox Ver.4 play. Files copied to the
-  card "may not playback properly or at all". The camera cannot record or delete
+  card "may not playback properly or at all". The camera can't record or delete
   tracks itself.
 - Music lives in the hidden folder `SD_AUDIO\` as `AOB001.SA1` and so on. The card's
   "missing" capacity is the CPRM protected area.
@@ -25,10 +25,10 @@ From the US operating instructions (pages 28, 43, 45, 52, 61, 63):
   either and the library is lost; cards already checked out keep playing.
 - MP3s made elsewhere go in through SD-Jukebox's Import function.
 
-So there is no DRM-free music mode on this camera. Later D-snap audio players with a
-line-in had a plain-MP3 folder trick; the AV50 does not.
+So there's no DRM-free music mode on this camera. Later D-snap audio players with a
+line-in had a plain-MP3 folder trick; the AV50 doesn't.
 
-## How SD-Audio works, and why there is no third way
+## How SD-Audio works, and why there's no third way
 
 Sources: Matsushita patent US7930478B2, the 4C CPRM specifications, the SD
 Association's pages, the Realtek CPRM pass-through code in the Linux staging tree.
@@ -47,7 +47,7 @@ Association's pages, the Realtek CPRM pass-through code in the Linux staging tre
   accepts vendor-specific SCSI pass-through commands that tunnel raw SD commands. The
   AKE runs in the host software against the card through that tunnel. The Linux
   driver for Realtek readers shows this shape in public source; Panasonic's own
-  opcodes are not public.
+  opcodes aren't public.
 
 Consequences:
 
@@ -59,19 +59,19 @@ Consequences:
   CPRM. The licensed third-party writers (Toshiba Audio Manager, MOOCS PLAYER,
   SD-MobileImpact) are all discontinued and had the same requirements.
 - Every SD-Jukebox version from 1 to 7 writes only CPRM check-outs. "Do not convert"
-  keeps the codec but still encrypts. There is no unencrypted output mode.
+  keeps the codec but still encrypts. There's no unencrypted output mode.
 - The card must have a CPRM protected area. CPRM was mandatory on every SD card until
   SD specification 6.10 in March 2018, but in practice many cards made after about
-  2010 ship with a zero-size protected area. A card with none cannot be made to work by
+  2010 ship with a zero-size protected area. A card with none can't be made to work by
   any software, because the camera reads the title keys from that area at playback.
 
 ## Why the camera itself is the enforcer
 
-A "bypass" on the PC side does not exist because the PC side is not where the check
+A "bypass" on the PC side doesn't exist because the PC side isn't where the check
 happens. The card controller hides and unlocks the protected area; the camera firmware
 reads the keys from it and decrypts the audio. Faking either would need the licensed
 device keys (and still a card with the area), or a firmware patch for a 2004 SoC with
-no update path. I did not pursue either.
+no update path. I didn't go down either road.
 
 ## The SV-AV50 is an official writer
 
@@ -96,7 +96,7 @@ stopped distributing the "security program for copyright protection" that newer
 versions fetch at first launch, and warns that a new install may then fail to start.
 The V4 manual has no such step, and on both the V4.0 and V5.1 discs the CPRM library
 is generated locally by the installer (see cradle-and-secure-layer.md). Panasonic
-states that SD-Jukebox does not run on Windows 10 and never mentions Windows 11.
+states that SD-Jukebox doesn't run on Windows 10 and never mentions Windows 11.
 
 ## Every published attempt I found
 
@@ -109,11 +109,11 @@ As of October 2026. None involves the SV-AV50, and none has Windows 11 working.
 | archive.org uploader, 2023 | V6.0 LE | Japanese XP SP3 in VMware 15.5 | SV-SD800N player itself over USB | works: a player on USB is a valid writer inside a VM |
 | isobe.exblog.jp (site down) | ? | Windows 7 XP Mode | SD-Audio device via XP Mode USB | card seen; laborious. Second-hand |
 | Yahoo Chiebukuro, 2023 | ? | native Windows 11 | Panasonic CPRM reader | fails at the SD write step |
-| Yahoo Chiebukuro, undated | ? | Windows 10 | SV-SD400V | Windows sees the card, SD-Jukebox does not |
+| Yahoo Chiebukuro, undated | ? | Windows 10 | SV-SD400V | Windows sees the card, SD-Jukebox doesn't |
 
-Pattern in the successes: 32-bit Windows no newer than 7, native or in a VM; a
-Panasonic CPRM device on USB; an install from CD. My result fits the pattern: XP in a
-VM, the camera's own cradle as the device, an archived CD image.
+The successes have three things in common: 32-bit Windows no newer than 7, native or
+in a VM; a Panasonic CPRM device on USB; an install from CD. Mine fits: XP in a VM, the
+camera's own cradle as the device, an archived CD image.
 
 ## Sources
 

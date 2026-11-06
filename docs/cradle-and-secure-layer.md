@@ -13,7 +13,7 @@ The camera enters PC mode only when all of these hold, in this order:
 1. Camera off, seated on the cradle.
 2. AC adaptor plugged into the cradle's DC-in, and the battery fitted. The manual is
    explicit that both are required.
-3. Camera on, mode switch at PLAY. There is no USB menu item; USB mode engages by
+3. Camera on, mode switch at PLAY. There's no USB menu item; USB mode engages by
    itself when the cable is detected in PLAY mode.
 4. USB cable plugged in last, straight into a PC port, no hub.
 
@@ -25,8 +25,9 @@ port. Charging happens with the camera off, so a cradle that charges fine proves
 the power pins.
 
 My first attempt showed nothing on the USB bus at all, and I spent a day reading about
-drivers before going back to the manual and meeting all four conditions. Then it
-enumerated at once. A silent bus is power, mode or cable, not a driver.
+drivers before going back to the manual and doing all four steps properly. Then it
+enumerated straight away. If nothing shows up on the bus, it's power, mode or cable,
+not a driver.
 
 ## What Windows 11 sees, with no Panasonic software
 
@@ -62,7 +63,7 @@ none, plus a 9x port driver. The install section is literally named `USBSTOR_BUL
 This half is never used on 2000/XP or later.
 
 For 2000/XP, component "2000SDA", it carries `sdpaums.dll`, `SDDEVMGR.dll`,
-`sdpasvc.exe` and `sdsrvctl.exe`. There is no kernel driver in this half. This is what
+`sdpasvc.exe` and `sdsrvctl.exe`. There's no kernel driver in this half. This is what
 SD-Jukebox needs for CPRM, and this is why the AV50 behaves differently from
 Panasonic's card readers (kernel drivers, 32-bit only, unsigned, dead on x64) and from
 the SV-AV100 (a Hitachi-written vendor USB driver plus a virtual SCSI miniport, also
@@ -91,10 +92,10 @@ why the file names are shared. The V5.1 LE package carries byte-identical copies
 
 ## The CPRM key library is generated locally
 
-The SD-Jukebox V4.0 installer runs `Cfg.exe` (imports only kernel32, so it cannot use
+The SD-Jukebox V4.0 installer runs `Cfg.exe` (imports only kernel32, so it can't use
 the network) against a 5 MB opaque blob on the disc called `SDCpA` and a per-machine
 file `HO`, checks a hash, and writes `SDCprm.dll` into
-`Common Files\Panasonic\SDApf\`. That is the per-machine CPRM library bound to the PC,
+`Common Files\Panasonic\SDApf\`. That's the per-machine CPRM library bound to the PC,
 the piece the manual's "CPU and hard disk identity" warning refers to, and the piece
 later versions fetched online at first launch. On the V4.0 disc it never touches the
 network. In practice the install completed offline and the library appeared, about
@@ -102,8 +103,8 @@ network. In practice the install completed offline and the library appeared, abo
 1.3 MB `SDCprm.dll`.
 
 The `.text` section of the resulting `SDCprm.dll` has an entropy of about 7.97 bits
-per byte, so it is encrypted or packed. Everything that decides whether a card is
-acceptable runs inside it. I did not open it.
+per byte, so it's encrypted or packed. Everything that decides whether a card is
+acceptable runs inside it, and I haven't looked inside.
 
 ## SD-Jukebox V4.0L40 package facts
 
@@ -115,21 +116,21 @@ InstallShield 6 header and the unpacked files:
   layer above; Gracenote CDDB; the Windows Media Format 9 redistributable; the Intel
   IPP runtime.
 - The only kernel driver in the whole package is `audsub3.sys`, an NEC helper for CD
-  digital audio extraction. It does not load on x64 and has nothing to do with card
+  digital audio extraction. It doesn't load on x64 and has nothing to do with card
   check-out.
 - `Device.ini` has an `SV-AV50/AV25` profile: `CodecFlg=6` (MP3 and AAC, no WMA),
   default output AAC.
-- The installer asks for a serial number from the CD case, has an OS check that is a
-  continue-anyway prompt on anything that is not 2000/XP, and stores the serial in
+- The installer asks for a serial number from the CD case, has an OS check that's a
+  continue-anyway prompt on anything that isn't 2000/XP, and stores the serial in
   `HKLM\Software\CNC\SD-JukeboxV4\Settings`. The application reads that value back
   for its About box and never re-validates it.
 - It registers `sdpasvc.exe -service` as the service `SDPASVC`, installs the secure
   files, and runs `Cfg.exe` as above.
 - Its release note says the package contains the 1999 "Intel Software Integrity
-  System" tamper layer. In practice V4.0 did not object to Windows 11.
+  System" tamper layer. In practice V4.0 didn't object to Windows 11.
 - The still-live English updater (V4.0L20/L40 to V4.0L60 LE) fixes MP3 import and
   check-out failures. The 1 GB card fix is only in the Japanese V4.1 LE differential,
-  which does not apply to the export build. I applied neither.
+  which doesn't apply to the export build. I applied neither.
 
 ## SD-Jukebox V5.1 LE package facts
 

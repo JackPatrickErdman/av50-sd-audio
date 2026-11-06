@@ -1,9 +1,9 @@
 # The video route: songs as SD-Video clips (untested)
 
-Status: I encoded one file and never played it on the camera. Treat everything below
-as an idea with the one experiment that matters still pending. It became moot when the
-real SD-Audio route worked (xp-vm-route.md), and then the camera developed a hardware
-fault before I got back to it (status.md).
+I encoded one file and never played it on the camera, so everything below is an idea
+with the one experiment that matters still pending. It stopped mattering when the real
+SD-Audio route worked (xp-vm-route.md), and then the camera developed a hardware fault
+before I got back to it (status.md).
 
 ## The idea
 
@@ -33,28 +33,28 @@ ffmpeg -loop 1 -framerate 6 -i cover.jpg -i song.mp3 -map 0:v -map 1:a -shortest
 ```
 
 A 4:45 track came out at 4.0 MB, so an album is roughly 40 MB, about 0.85 MB per
-minute. ffprobe reports the result with the same stream layout as the camera's clips.
-That is all I know.
+minute. ffprobe shows the result with the same stream layout as the camera's clips,
+and that's as far as I got.
 
-## Costs, known now
+## What it costs
 
 - Telephone-grade audio. G.726 at 8 kHz mono is the only audio codec the camera's
   video decoder has. Nothing above 4 kHz, no stereo. This is a limit of the camera, not
   of the encode.
 - No titles. The camera shows clips as 100-0003 and so on.
 
-## Unknowns, to be settled by the test
+## What I don't know yet
 
 - Whether the camera needs SD-Video management files alongside the `.ASF`. My card
-  dumps did not preserve the non-ASF files in the `SD_VIDEO` tree (one dump's folder
-  was unreadable), so I do not know either way.
+  dumps didn't preserve the non-ASF files in the `SD_VIDEO` tree (one dump's folder
+  was unreadable), so I don't know either way.
 - Whether a 6 fps still-image stream is accepted, or whether the camera expects one of
   its own frame rates.
 - Whether ffmpeg's ASF muxer timing satisfies the camera's demuxer.
 
-## The fallback that cannot be rejected
+## The fallback the camera can't refuse
 
 The Japanese cradle has AV-in. In record mode with [Input select] set to Line, the
 camera records composite video and line audio to the card as its own ASF clip. Playing
 the album from a PC into that jack produces camera-native files, in real time, at the
-same telephone-grade quality. I did not try this either.
+same telephone-grade quality. I haven't tried this either.
