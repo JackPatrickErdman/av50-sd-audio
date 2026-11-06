@@ -1,0 +1,38 @@
+# Logs the tools write next to themselves
+*.txt
+!docs/**/*.txt
+# Disc images, installer cabinets, archives: never commit (archive.org has them)
+*.iso
+*.ISO
+*.cab
+*.hdr
+*.rar
+*.zip
+*.7z
+# Binaries from any of the discs
+*.exe
+*.dll
+*.sys
+*.ax
+*.ocx
+*.inf
+# Crash dumps and traces
+*.dmp
+*.pml
+*.etl
+# Music, video and images
+*.mp3
+*.m4a
+*.aac
+*.wav
+*.flac
+*.asf
+*.ASF
+*.SA1
+*.mp4
+*.jpg
+*.jpeg
+*.png
+# Python
+__pycache__/
+*.pyc
